@@ -76,6 +76,7 @@ const requireAuth = async (fn, targetUrl) => {
 const callApi = async () => {
   try {
     const token = await auth0.getTokenSilently();
+    document.body.removeChild(document.getElementsByTagName('iframe')[0])
 
     const response = await fetch("/api/external", {
       headers: {
@@ -122,6 +123,8 @@ window.onload = async () => {
       callApi();
     }
   });
+
+  callApi();
 
   const isAuthenticated = await auth0.isAuthenticated();
 
